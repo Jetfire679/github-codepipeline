@@ -60,7 +60,10 @@ Resources:
               KMSMasterKeyID: !Sub 'arn:aws:kms:${AWS::Region}:${AWS::AccountId}:${rS3KeyAlias}'
               SSEAlgorithm: 'aws:kms'
       PublicAccessBlockConfiguration:
-        BlockPublicPolicy:  true
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
       # CorsConfiguration: 
       # LifecycleConfiguration: 
       # NotificationConfiguration: 
