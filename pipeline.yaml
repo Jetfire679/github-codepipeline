@@ -88,6 +88,21 @@ Resources:
             StackName: !Ref ApplicationStackName
             TemplatePath: !Sub "SourceCode::application.yaml"
           RunOrder: 1
+        - Name: CloudFormationDeploy2
+          ActionTypeId:
+            Category: Deploy
+            Owner: AWS
+            Provider: CloudFormation
+            Version: '1'
+          InputArtifacts:
+            - Name: SourceCode
+          Configuration:
+            ActionMode: CREATE_UPDATE
+            Capabilities: CAPABILITY_IAM
+            RoleArn: !GetAtt CloudformationRole.Arn
+            StackName: !Sub "${ApplicationStackName}-stack2"
+            TemplatePath: !Sub "SourceCode::CFN-S3.yaml"
+          RunOrder: 2          
 
   # 'GithubWebhook' satisfies two requirements:
   # -- Means that updates are pushed from GitHub, rather than AWS having to poll
